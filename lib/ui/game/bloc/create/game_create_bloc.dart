@@ -30,4 +30,3 @@ class GameCreateBloc extends Bloc<GameCreateEvent, GameCreateState> {
     }
   }
 }
-}
