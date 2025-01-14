@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:latihan_api_bloc/data/models/game_models.dart';
 import 'package:latihan_api_bloc/ui/game/bloc/index/game_index_bloc.dart';
 
 class GameListPage extends StatelessWidget {
@@ -26,9 +27,18 @@ class GameListPage extends StatelessWidget {
             }else if(state is GameIndexError){
               return Center(child: Text(state.message),);
             }else if(state is GameIndexLoaded){
-              return ListView.builder(itemCount: state.list.length,
-                  itemBuilder: (context, index){
-                return ListTile(title: Text(state.list[index].name),);
+              return ListView.builder(
+                  itemCount: state.list.length,
+                  itemBuilder: (context, index) {
+                    GameModel gameModel = state.list[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        child: Text(gameModel.id.toString()),
+                      ),
+                      title: Text(state.list[index].name),
+                      subtitle: Text(state.list[index].status),
+                      trailing: Text(gameModel.price),
+                    );
                   });
             }
             return Container();
